@@ -38,7 +38,7 @@ class HomeViewController: UIViewController {
         calendarView.fontDesign = .rounded
         
         calendarView.delegate = self
-        
+        calendarView.selectionBehavior = UICalendarSelectionSingleDate(delegate: self)
         view.addSubview(calendarView)
         
         calendarView.snp.makeConstraints { make in
@@ -48,7 +48,12 @@ class HomeViewController: UIViewController {
     }
 }
 
-extension HomeViewController: UICalendarViewDelegate {
+extension HomeViewController: UICalendarViewDelegate, UICalendarSelectionSingleDateDelegate {
+    
+    func dateSelection(_ selection: UICalendarSelectionSingleDate, didSelectDate dateComponents: DateComponents?) {
+        print("dateComponents: \(dateComponents)")
+    }
+    
     
 //    func calendarView(_ calendarView: UICalendarView, decorationFor dateComponents: DateComponents) -> UICalendarView.Decoration? {
 //        let font = UIFont.systemFont(ofSize: 10)
@@ -60,5 +65,7 @@ extension HomeViewController: UICalendarViewDelegate {
     func calendarView(_ calendarView: UICalendarView, didChangeVisibleDateComponentsFrom previousDateComponents: DateComponents) {
         print("previousDateComponents: \(previousDateComponents)")
     }
+    
+    
 }
 
